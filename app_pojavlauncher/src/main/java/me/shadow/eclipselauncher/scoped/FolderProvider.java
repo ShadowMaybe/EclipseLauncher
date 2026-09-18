@@ -18,7 +18,7 @@ import android.webkit.MimeTypeMap;
 
 import androidx.annotation.Nullable;
 
-import git.artdeell.mojo.BuildConfig;
+import me.shadow.eclipselauncher.BuildConfig;
 import me.shadow.eclipselauncher.R;
 import me.shadow.eclipselauncher.Tools;
 

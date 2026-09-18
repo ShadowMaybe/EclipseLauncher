@@ -27,25 +27,25 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
-import net.kdt.pojavlaunch.PojavApplication;
-import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.authenticator.AuthType;
-import net.kdt.pojavlaunch.authenticator.BackgroundLogin;
-import net.kdt.pojavlaunch.authenticator.accounts.Accounts;
-import net.kdt.pojavlaunch.authenticator.accounts.Account;
-import net.kdt.pojavlaunch.authenticator.impl.PresentedException;
-import net.kdt.pojavlaunch.authenticator.listener.LoginListener;
-import net.kdt.pojavlaunch.extra.ExtraConstants;
-import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.extra.ExtraListener;
-import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import me.shadow.eclipselauncher.EclipseApplication;
+import me.shadow.eclipselauncher.Tools;
+import me.shadow.eclipselauncher.authenticator.AuthType;
+import me.shadow.eclipselauncher.authenticator.BackgroundLogin;
+import me.shadow.eclipselauncher.authenticator.accounts.Accounts;
+import me.shadow.eclipselauncher.authenticator.accounts.Account;
+import me.shadow.eclipselauncher.authenticator.impl.PresentedException;
+import me.shadow.eclipselauncher.authenticator.listener.LoginListener;
+import me.shadow.eclipselauncher.extra.ExtraConstants;
+import me.shadow.eclipselauncher.extra.ExtraCore;
+import me.shadow.eclipselauncher.extra.ExtraListener;
+import me.shadow.eclipselauncher.progresskeeper.ProgressKeeper;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 
 import fr.spse.extended_view.ExtendedTextView;
-import git.artdeell.mojo.R;
+import me.shadow.eclipselauncher.R;
 
 public class AccountSpinner extends AppCompatSpinner implements LoginListener, AdapterView.OnItemSelectedListener, ValueAnimator.AnimatorUpdateListener {
     private Adapter mAdapter;
@@ -141,7 +141,7 @@ public class AccountSpinner extends AppCompatSpinner implements LoginListener, A
     }
 
     private void reload() {
-        PojavApplication.sExecutorService.execute(()->{
+        EclipseApplication.sExecutorService.execute(()->{
             try {
                 Accounts accounts = Accounts.load();
                 Tools.runOnUiThread(()->refresh(accounts));

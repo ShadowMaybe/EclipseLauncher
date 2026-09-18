@@ -31,11 +31,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import git.artdeell.mojo.BuildConfig;
+import me.shadow.eclipselauncher.BuildConfig;
 import me.shadow.eclipselauncher.R;
 
 public class EclipseApplication extends Application {
-	public static final String CRASH_REPORT_TAG = "PojavCrashReport";
+	public static final String CRASH_REPORT_TAG = "EclipseCrashReport";
 	public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
 
 	private void installFatalErrorHandler() {

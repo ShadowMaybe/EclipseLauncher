@@ -138,7 +138,7 @@ public final class Tools {
     }
 
     /**
-     * Checks if the Pojav's storage root is accessible and read-writable
+     * Checks if the Eclipse storage root is accessible and read-writable
      * @param context context to get the storage root if it's not set yet
      * @return true if storage is fine, false if storage is not accessible
      */
@@ -147,7 +147,7 @@ public final class Tools {
     }
 
     /**
-     * Checks if the Pojav's storage root is accessible and read-writable. If it's not, starts
+     * Checks if the Eclipse storage root is accessible and read-writable. If it's not, starts
      * the MissingStorageActivity and finishes the supplied activity.
      * @param context the Activity that checks for storage availability
      * @return whether the storage is available or not.

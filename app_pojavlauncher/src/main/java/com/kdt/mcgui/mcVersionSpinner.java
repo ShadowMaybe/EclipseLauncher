@@ -20,19 +20,19 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import git.artdeell.mojo.R;
+import me.shadow.eclipselauncher.R;
 
-import net.kdt.pojavlaunch.PojavApplication;
-import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.extra.ExtraConstants;
-import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.extra.ExtraListener;
-import net.kdt.pojavlaunch.fragments.InstanceEditorFragment;
-import net.kdt.pojavlaunch.fragments.ProfileTypeSelectFragment;
-import net.kdt.pojavlaunch.instances.DisplayInstance;
-import net.kdt.pojavlaunch.instances.Instances;
-import net.kdt.pojavlaunch.instances.InstanceAdapter;
-import net.kdt.pojavlaunch.instances.InstanceAdapterExtra;
+import me.shadow.eclipselauncher.EclipseApplication;
+import me.shadow.eclipselauncher.Tools;
+import me.shadow.eclipselauncher.extra.ExtraConstants;
+import me.shadow.eclipselauncher.extra.ExtraCore;
+import me.shadow.eclipselauncher.extra.ExtraListener;
+import me.shadow.eclipselauncher.fragments.InstanceEditorFragment;
+import me.shadow.eclipselauncher.fragments.ProfileTypeSelectFragment;
+import me.shadow.eclipselauncher.instances.DisplayInstance;
+import me.shadow.eclipselauncher.instances.Instances;
+import me.shadow.eclipselauncher.instances.InstanceAdapter;
+import me.shadow.eclipselauncher.instances.InstanceAdapterExtra;
 
 import java.io.IOException;
 
@@ -99,7 +99,7 @@ public class mcVersionSpinner extends ExtendedTextView {
 
     /** Reload profiles from the file, forcing the spinner to consider the new data */
     public void reloadProfiles() {
-        PojavApplication.sExecutorService.execute(()->{
+        EclipseApplication.sExecutorService.execute(()->{
             try {
                 final Instances instances = Instances.loadDisplay();
                 Tools.runOnUiThread(()->applyInstances(instances));

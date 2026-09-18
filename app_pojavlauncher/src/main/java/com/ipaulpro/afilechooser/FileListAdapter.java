@@ -21,9 +21,9 @@ import android.view.*;
 import android.widget.*;
 import java.io.*;
 import java.util.*;
-import net.kdt.pojavlaunch.*;
+import me.shadow.eclipselauncher.*;
 
-import git.artdeell.mojo.R;
+import me.shadow.eclipselauncher.R;
 
 /**
  * List adapter for Files.

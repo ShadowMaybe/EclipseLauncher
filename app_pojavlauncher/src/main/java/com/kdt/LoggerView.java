@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import net.kdt.pojavlaunch.Logger;
-import git.artdeell.mojo.R;
+import me.shadow.eclipselauncher.Logger;
+import me.shadow.eclipselauncher.R;
 
 /**
  * A class able to display logs to the user.

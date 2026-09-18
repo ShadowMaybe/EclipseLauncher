@@ -20,8 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.res.ResourcesCompat;
 
-import git.artdeell.mojo.R;
-import net.kdt.pojavlaunch.Tools;
+import me.shadow.eclipselauncher.R;
+import me.shadow.eclipselauncher.Tools;
 
 /**
  * The base class for side dialog views

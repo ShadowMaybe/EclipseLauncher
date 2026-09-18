@@ -14,11 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import git.artdeell.mojo.R;
+import me.shadow.eclipselauncher.R;
 
-import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
-import net.kdt.pojavlaunch.progresskeeper.ProgressListener;
-import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
+import me.shadow.eclipselauncher.progresskeeper.ProgressKeeper;
+import me.shadow.eclipselauncher.progresskeeper.ProgressListener;
+import me.shadow.eclipselauncher.progresskeeper.TaskCountListener;
 
 import java.util.ArrayList;
 
