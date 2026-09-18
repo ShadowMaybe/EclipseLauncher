@@ -1,12 +1,7 @@
 package net.kdt.pojavlaunch.game.renderer;
 
-import static net.kdt.pojavlaunch.game.renderer.def.Renderers.FREEDRENO_RENDERER;
 import static net.kdt.pojavlaunch.game.renderer.def.Renderers.GL4ES_RENDERER;
-import static net.kdt.pojavlaunch.game.renderer.def.Renderers.LEGACYZINK_RENDERER;
 import static net.kdt.pojavlaunch.game.renderer.def.Renderers.LTW_RENDERER;
-import static net.kdt.pojavlaunch.game.renderer.def.Renderers.MESA_RENDERER;
-import static net.kdt.pojavlaunch.game.renderer.def.Renderers.MESA_RENDERER_EXT;
-import static net.kdt.pojavlaunch.game.renderer.def.Renderers.ZINK_RENDERER;
 
 import android.content.Context;
 import android.system.ErrnoException;
@@ -16,7 +11,6 @@ import android.util.Log;
 import net.kdt.pojavlaunch.Logger;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.game.renderer.impl.GLESRenderSpec;
-import net.kdt.pojavlaunch.game.renderer.impl.MesaRenderSpec;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.util.HashMap;
@@ -65,11 +59,6 @@ public class GameRenderer {
             case "opengles2_5":
             case GL4ES_RENDERER: return new GLESRenderSpec.GL4ESRenderSpec();
             case LTW_RENDERER: return new GLESRenderSpec.LTWRenderSpec();
-            case ZINK_RENDERER: return new MesaRenderSpec.ZinkRenderSpec();
-            case FREEDRENO_RENDERER: return new MesaRenderSpec.FreedrenoRenderSpec();
-            case MESA_RENDERER: return new MesaRenderSpec();
-            case MESA_RENDERER_EXT: return new MesaRenderSpec.ExtMesaRenderSpec();
-            case LEGACYZINK_RENDERER: return new MesaRenderSpec.LegacyZinkRenderSpec();
             default:
                 Log.e(TAG, "Unknown renderer " + renderer);
                 return null;
@@ -153,14 +142,6 @@ public class GameRenderer {
             return getKnownRenderer(FALLBACK_RENDERER).setupRenderer();
         }
         return true;
-    }
-
-    /**
-     * Enable custom Vulkan driver (Turnip) usage
-     */
-    public void overrideVulkanDriver() {
-        if(LauncherPreferences.PREF_FREEDRENO_SYSMEM) environment.put("TU_DEBUG", "sysmem");
-        MojoExec.setUseTurnip(true);
     }
 
     /**

@@ -1,7 +1,5 @@
 package net.kdt.pojavlaunch.utils.jre;
 
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_ZINK_PREFER_SYSTEM_DRIVER;
-
 import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.Toast;
