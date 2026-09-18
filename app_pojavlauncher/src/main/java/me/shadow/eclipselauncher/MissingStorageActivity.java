@@ -1,0 +1,15 @@
+package me.shadow.eclipselauncher;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import me.shadow.eclipselauncher.R;
+
+public class MissingStorageActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.storage_test_no_sdcard);
+    }
+}
