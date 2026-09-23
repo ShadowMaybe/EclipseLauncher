@@ -107,7 +107,7 @@ Question for product owner: Resolved 2026-09-23 — create a new original clean-
 
 ID: DQ-012
 Location: Git remote, CI, release workflow, legal notices
-Current behavior: `ShadowMaybe/EclipseLauncher` does not yet exist.
+Current behavior: Public repository `ShadowMaybe/EclipseLauncher` was created and Phase 0 was pushed to `main` on 2026-09-23.
 Options: replace
 Impact: Determines source visibility, collaboration model, release provenance, and public support expectations.
 Question for product owner: Resolved 2026-09-23 — create public repository `ShadowMaybe/EclipseLauncher`.
@@ -161,7 +161,7 @@ Question for product owner: Open — obtain qualified review for `Eclipse Launch
 
 ID: DQ-018
 Location: About, legal notices, support/help, update presentation
-Current behavior: The public source repository is approved but has not yet been created.
+Current behavior: The approved public source repository exists at `https://github.com/ShadowMaybe/EclipseLauncher`.
 Options: replace
 Impact: Links must accurately identify Eclipse Launcher and must not imply endorsement or expose unapproved social/community identities.
 Question for product owner: Resolved 2026-09-23 — after repository creation, the About/legal area may link to `https://github.com/ShadowMaybe/EclipseLauncher` as the source repository. No other social or promotional link is approved.
