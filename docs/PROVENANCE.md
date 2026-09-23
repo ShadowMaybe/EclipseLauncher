@@ -87,7 +87,16 @@ AI-generated output, commissioned output, and stock output are not presumed free
 - Key rotation, revocation, recovery ownership, and release-signing verification are recorded in the security operations runbook when that runbook is created.
 - Public certificates and public keys may be committed only after provenance and intended distribution are reviewed.
 
-## 8. Review gates
+## 8. Phase 1 original visual asset
+
+| Asset | Purpose | Author/source | Creation method | License/distribution | Modifications | Provenance status |
+|---|---|---|---|---|---|---|
+| `app/src/main/res/drawable/ic_eclipse_foreground.xml` | Original Eclipse adaptive-icon foreground | Eclipse Launcher project | Geometric circle, offset eclipse disc, and cardinal corona rays authored from scratch for this repository | Apache-2.0 with the project, subject to DQ-017 trademark clearance | Initial creation | P1 original work; no external asset or tracing |
+| `app/src/main/res/drawable/ic_eclipse_monochrome.xml` | Original Android themed-icon geometry | Eclipse Launcher project | Independently authored from the same project geometry using a single tintable paint | Apache-2.0 with the project, subject to DQ-017 trademark clearance | Initial creation | P1 original work; no external asset or tracing |
+
+The Phase 1 mark does not incorporate game artwork, third-party logos, source-project marks, fonts, raster images, or generated imagery. It is original Eclipse Launcher artwork, not a representation of another product. It must not be described as trademark-cleared until DQ-017 closes.
+
+## 9. Review gates
 
 A change is provenance-clean only when reviewers can answer “yes” to all applicable questions:
 
@@ -101,7 +110,7 @@ A change is provenance-clean only when reviewers can answer “yes” to all app
 
 A failed gate blocks merge or release. Silence about an input’s origin is treated as a failed gate.
 
-## 9. Planned legal and policy files
+## 10. Planned legal and policy files
 
 The following files are planned for later phases and must be reviewed before release:
 
@@ -120,6 +129,6 @@ The following files are planned for later phases and must be reviewed before rel
 
 Until those files are created, this file records their intent; their absence is not approval to omit required legal attribution.
 
-## 10. Path A completion rule
+## 11. Path A completion rule
 
 The project remains Path A clean-room only while every source, dependency, asset, data set, binary, key, legal statement, and brand input has a recorded provenance category and passes the applicable review gate. Any uncertainty moves the item to P7 until independently resolved.

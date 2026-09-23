@@ -1,0 +1,101 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build and publish signed APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4.0.4
+        with:
+          accept-android-sdk-licenses: true
+          packages: |
+            platform-tools
+            platforms;android-37
+            build-tools;36.0.0
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+
+      - name: Decode release signing key
+        shell: bash
+        env:
+          ECLIPSE_KEYSTORE_BASE64: ${{ secrets.ECLIPSE_KEYSTORE_BASE64 }}
+          ECLIPSE_KEY_ALIAS: ${{ secrets.ECLIPSE_KEY_ALIAS }}
+          ECLIPSE_STORE_PASSWORD: ${{ secrets.ECLIPSE_STORE_PASSWORD }}
+          ECLIPSE_KEY_PASSWORD: ${{ secrets.ECLIPSE_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          [[ -n "${ECLIPSE_KEYSTORE_BASE64:-}" ]] || { echo "ECLIPSE_KEYSTORE_BASE64 is required" >&2; exit 1; }
+          [[ -n "${ECLIPSE_KEY_ALIAS:-}" ]] || { echo "ECLIPSE_KEY_ALIAS is required" >&2; exit 1; }
+          [[ -n "${ECLIPSE_STORE_PASSWORD:-}" ]] || { echo "ECLIPSE_STORE_PASSWORD is required" >&2; exit 1; }
+          [[ -n "${ECLIPSE_KEY_PASSWORD:-}" ]] || { echo "ECLIPSE_KEY_PASSWORD is required" >&2; exit 1; }
+          keystore_path="${RUNNER_TEMP}/eclipse-release.jks"
+          printf '%s' "${ECLIPSE_KEYSTORE_BASE64}" | base64 --decode > "${keystore_path}"
+          chmod 600 "${keystore_path}"
+          echo "ECLIPSE_KEYSTORE_PATH=${keystore_path}" >> "${GITHUB_ENV}"
+
+      - name: Run tests, lint, and release assembly
+        shell: bash
+        env:
+          ECLIPSE_KEY_ALIAS: ${{ secrets.ECLIPSE_KEY_ALIAS }}
+          ECLIPSE_STORE_PASSWORD: ${{ secrets.ECLIPSE_STORE_PASSWORD }}
+          ECLIPSE_KEY_PASSWORD: ${{ secrets.ECLIPSE_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon --stacktrace testDebugUnitTest lintRelease assembleRelease
+
+      - name: Verify and stage signed APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t release_apks < <(
+            find app/build/outputs/apk/release -maxdepth 1 -type f -name '*.apk' ! -name '*-unsigned.apk' -print
+          )
+          if [[ "${#release_apks[@]}" -ne 1 ]]; then
+            printf 'Expected one signed release APK, found %s\n' "${#release_apks[@]}" >&2
+            exit 1
+          fi
+          "${ANDROID_HOME}/build-tools/36.0.0/apksigner" verify --verbose --print-certs "${release_apks[0]}"
+          mkdir -p dist
+          release_apk="dist/EclipseLauncher-${GITHUB_REF_NAME}.apk"
+          cp "${release_apks[0]}" "${release_apk}"
+          sha256sum "${release_apk}" > "${release_apk}.sha256"
+
+      - name: Publish APK to GitHub Releases
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          files: |
+            dist/EclipseLauncher-${{ github.ref_name }}.apk
+            dist/EclipseLauncher-${{ github.ref_name }}.apk.sha256
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+
+      - name: Remove release signing key
+        if: always()
+        shell: bash
+        run: rm -f "${RUNNER_TEMP}/eclipse-release.jks"
