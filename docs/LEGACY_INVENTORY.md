@@ -747,7 +747,7 @@ The target is no longer empty. Phase 1 independently created the following found
 - CI verification without workflow-artifact publication;
 - a tag-only signed-release workflow that publishes directly to GitHub Releases.
 
-GitHub Actions run `35902766542` passed `testDebugUnitTest`, `lintDebug`, and `assembleDebug` on 2026-09-23. No APK was built locally. The signed release workflow has intentionally not been run because production signing values are still blocked by DQ-013.
+GitHub Actions run `36036686843` passed `testDebugUnitTest`, `lintDebug`, `assembleDebug`, and debug APK identity inspection on 2026-09-24. No APK was built locally. The signed release workflow has intentionally not been run because production signing values are still blocked by DQ-013.
 
 The 132-row parity ledger remains the implementation ledger. The minimal Phase 1 shell is a build/identity verification surface and does not mark any launcher workflow row implemented.
 

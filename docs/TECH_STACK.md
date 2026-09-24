@@ -75,15 +75,16 @@ Result: exit 127, `./gradlew: No such file or directory`. This is the expected p
 
 ## Phase 1 Actions verification
 
-GitHub Actions run `35902766542` completed successfully on 2026-09-23 for commit `770523079549f427e6d0caf281ce2e7dd6f0f8ae`:
+GitHub Actions run `36036686843` completed successfully on 2026-09-24 for commit `59463bbed40155508cb4280d729e08cc65465e85`:
 
 - official Gradle wrapper verification passed;
 - `testDebugUnitTest` passed;
 - `lintDebug` passed;
 - `assembleDebug` passed;
+- debug APK package, version, SDK levels, label, and permission audit passed;
 - no APK workflow artifact was uploaded.
 
-The workflow installs the API 37 compile platform through the official Android CLI beta channel while keeping `targetSdk 36`. A subsequent CI step inspects the generated APK identity and metadata before the runner is discarded. The signed release workflow remains untested by design until DQ-013 supplies valid signing values.
+The workflow installs the API 37 compile platform through the official Android CLI beta channel while keeping `targetSdk 36`. The CI step inspects the generated APK identity and metadata before the runner is discarded. The signed release workflow remains untested by design until DQ-013 supplies valid signing values.
 
 ## Compatibility governance
 

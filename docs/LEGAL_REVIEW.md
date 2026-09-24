@@ -61,7 +61,7 @@ There is no advertising, analytics, telemetry, sponsor tracking, news feed, or s
 | Game assets/credentials excluded | Pass | Empty/synthetic Phase 1 resources only |
 | No ads/analytics/telemetry/social/news code | Pass | No dependencies or manifest permissions added |
 | Clean-room provenance recorded | Pass | `docs/PROVENANCE.md` |
-| Debug build, unit test, and lint | Pass | GitHub Actions run 35902766542 |
+| Debug build, unit test, lint, and APK identity | Pass | GitHub Actions run 36036686843 |
 | Release APK publication path | Pass, pending secrets | Tag-only workflow verifies signature and publishes directly to GitHub Releases |
 | Trademark clearance | Blocked | DQ-017 |
 | Microsoft OAuth registration | Blocked | DQ-016 |
