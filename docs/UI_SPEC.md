@@ -5,8 +5,8 @@
 - This document is the normative product and UI specification for Eclipse Launcher.
 - It is a clean-room design derived from the completed normalized audit of the legacy reference.
 - The accompanying parity matrix is the normative 132-row coverage ledger.
-- No visual assets, application code, credentials, service endpoints, OAuth client configuration, or release URLs are included.
-- Implementation has not started. Matrix statuses describe required disposition, not completed work.
+- No legacy visual assets, application code, credentials, service endpoints, OAuth client configuration, or release URLs are included.
+- Implementation is in its early phases. Matrix statuses describe required disposition; a row is marked implemented only when its required behavior and verification checks exist and pass.
 
 ## 2. Product scope
 
@@ -606,3 +606,15 @@ Each parity-matrix row must be verified through:
 - Apache-2.0 license and attribution review.
 
 A row is not considered implemented until its required behavior and verification checks exist and pass.
+
+## 18. Phase 2 implementation record
+
+Phase 2 establishes the first independently authored UI slice without claiming that the complete launcher is finished:
+
+- `:core:designsystem` owns the centralized Material 3 color, typography, shape, dimension, theme, icon, and reusable component tokens.
+- `:feature:home` owns an honest Home state model and adaptive Home presentation. The wide layout uses a 6.5/3 management-to-launch relationship; compact windows use the normative account → instance → Launch → management order.
+- The current state is a real prerequisite/empty state: no account and no installed instance are shown, Launch is disabled with the first actionable reason, and unavailable shell actions remain disabled with explanatory text. No fake success, progress, or navigation callback is used.
+- Previews cover wide light, wide dark, compact, dynamic color, and enlarged text configurations. Compose instrumentation checks semantics, disabled actions, and a screenshot theme contract.
+- CI runs the unit/lint/debug verification and connected Compose tests on an Actions emulator. The test workflow does not publish screenshots or APKs as workflow artifacts.
+
+The Home slice is an implementation milestone, not a final parity disposition. F01, S08, S09, A03, and all navigation/repository rows remain subject to their complete behavior and verification requirements.

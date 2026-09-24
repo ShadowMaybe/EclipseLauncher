@@ -1,7 +1,7 @@
 # Eclipse Launcher legal review
 
 **Review date:** 2026-09-24
-**Status:** Phase 1 foundation passed CI; not a legal opinion or final publication clearance.
+**Status:** Phase 2 design-system and Home-slice foundation passed CI; not a legal opinion or final publication clearance.
 
 ## 1. Independent-project identity
 
@@ -15,13 +15,13 @@ Game and service names may be used as factual compatibility references where leg
 
 - The project follows Path A clean-room development.
 - No source code, comments, strings, resources, artwork, data compilations, native binaries, runtime archives, or signing keys are inherited from another launcher.
-- The Phase 1 adaptive icon was authored from original geometry for this project and is recorded in `docs/PROVENANCE.md`.
+- The Phase 1 adaptive icon and Phase 2 Compose icon geometry were authored from original geometry for this project and are recorded in `docs/PROVENANCE.md`.
 - Any future source-derived contribution must stop the clean-room path, be approved through `docs/DECISION_QUEUE.md`, and receive a separate license/source-availability review.
 
 ## 3. Project license and notices
 
 - Original Eclipse Launcher code is licensed under Apache License 2.0; the full text is in `LICENSE`.
-- Direct Phase 1 dependencies and their upstream links are listed in `THIRD_PARTY_NOTICES.md`.
+- Direct current dependencies and their upstream links are listed in `THIRD_PARTY_NOTICES.md`.
 - A complete transitive SBOM and any required upstream license texts must be generated and reviewed before a public release.
 - No dependency may be added solely because it is available in a public repository. Source, checksum, license, security, maintenance, data collection, and native-code implications must be reviewed.
 
@@ -51,17 +51,19 @@ There is no advertising, analytics, telemetry, sponsor tracking, news feed, or s
 - The release workflow must verify the built APK signature before attaching it to GitHub Releases.
 - A signed APK does not replace review of native libraries, bundled assets, permissions, or dependency licenses.
 
-## 8. Current Phase 1 checklist
+## 8. Current implementation checklist
 
 | Check | Result | Evidence or blocker |
 |---|---|---|
 | Independent identity and non-affiliation notice recorded | Pass | This document and future About screen |
 | Apache-2.0 license text present | Pass | `LICENSE` |
 | Direct dependency notices recorded | Pass | `THIRD_PARTY_NOTICES.md` |
-| Game assets/credentials excluded | Pass | Empty/synthetic Phase 1 resources only |
+| Game assets/credentials excluded | Pass | Empty/synthetic app resources and original geometry only |
 | No ads/analytics/telemetry/social/news code | Pass | No dependencies or manifest permissions added |
 | Clean-room provenance recorded | Pass | `docs/PROVENANCE.md` |
-| Debug build, unit test, lint, and APK identity | Pass | GitHub Actions run 36036686843 |
+| Material 3 design system and Home slice | Pass for milestone | `:core:designsystem`, `:feature:home`, previews, and synthetic empty state |
+| Debug build, unit test, lint, and APK identity | Pass | GitHub Actions run `36040467221` |
+| Connected Compose semantics and screenshot contract | Pass | GitHub Actions run `36040467149` |
 | Release APK publication path | Pass, pending secrets | Tag-only workflow verifies signature and publishes directly to GitHub Releases |
 | Trademark clearance | Blocked | DQ-017 |
 | Microsoft OAuth registration | Blocked | DQ-016 |

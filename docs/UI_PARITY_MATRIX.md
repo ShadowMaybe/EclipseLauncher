@@ -1,6 +1,6 @@
 # Eclipse Launcher UI Parity Matrix
 
-This ledger contains exactly 132 normalized rows from the completed clean-room audit of the legacy reference. Status describes required disposition; implementation has not started. Retained capabilities are being specified and rebuilt independently rather than copied.
+This ledger contains exactly 132 normalized rows from the completed clean-room audit of the legacy reference. Status describes required disposition; the first implementation milestone is recorded below without treating partial UI work as a completed row. Retained capabilities are being specified and rebuilt independently rather than copied.
 
 | ID | Screen | Element/state | Required behavior | Material 3 implementation | Eclipse-specific change | Test/verification | Status |
 |---|---|---|---|---|---|---|---|
@@ -136,3 +136,13 @@ This ledger contains exactly 132 normalized rows from the completed clean-room a
 | S34 | Control state | Editor modified and unsaved | Distinguish saved, modified, and error states; guard Back/restart | Editor app bar status and discard/save dialogs | Original draft model and no immediate destructive delete | Modify/save/discard/Back/process death/rotation and TalkBack tests | replaced |
 | S35 | Legacy sponsor state | Sponsor loading, success, or hidden failure | Not part of Eclipse product scope | None | Remove sponsor models, service, UI, resources, and tests | Repository, dependency, resource, and APK scans find no sponsor state | intentionally removed |
 | S36 | Appearance state | Light, dark, dynamic color, background, and metric previews | Maintain readable contrast and restore theme/preview state | Material 3 color roles and `isSystemInDarkTheme` | Original Eclipse theme; no opacity-dependent unreadability | Light/dark/dynamic, contrast, font scale, background, rotation, and restoration tests | replaced |
+
+## Phase 2 evidence
+
+The first target-owned UI milestone is intentionally not counted as a completed row:
+
+- `:core:designsystem` centralizes Material 3 theme roles, dimensions, typography, shapes, original vector geometry, and reusable components.
+- `:feature:home` provides the wide 6.5/3 and compact prerequisite-state layouts, with no permanent bottom navigation.
+- The empty state exposes no simulated account, instance, task, launch, or navigation result. Disabled actions carry an explanation and no enabled action can fall through to a no-op.
+- Previews cover wide light/dark, compact, dynamic color, and enlarged text. Actions runs `36040467149` passed the connected Compose tests, including a screenshot theme contract; run `36040467221` passed unit tests, lint, debug assembly, and APK inspection.
+- F01 and related state rows remain `replaced` until their full behavior, repository wiring, restoration, and device verification are complete.

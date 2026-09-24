@@ -87,14 +87,15 @@ AI-generated output, commissioned output, and stock output are not presumed free
 - Key rotation, revocation, recovery ownership, and release-signing verification are recorded in the security operations runbook when that runbook is created.
 - Public certificates and public keys may be committed only after provenance and intended distribution are reviewed.
 
-## 8. Phase 1 original visual asset
+## 8. Original visual assets
 
 | Asset | Purpose | Author/source | Creation method | License/distribution | Modifications | Provenance status |
 |---|---|---|---|---|---|---|
 | `app/src/main/res/drawable/ic_eclipse_foreground.xml` | Original Eclipse adaptive-icon foreground | Eclipse Launcher project | Geometric circle, offset eclipse disc, and cardinal corona rays authored from scratch for this repository | Apache-2.0 with the project, subject to DQ-017 trademark clearance | Initial creation | P1 original work; no external asset or tracing |
 | `app/src/main/res/drawable/ic_eclipse_monochrome.xml` | Original Android themed-icon geometry | Eclipse Launcher project | Independently authored from the same project geometry using a single tintable paint | Apache-2.0 with the project, subject to DQ-017 trademark clearance | Initial creation | P1 original work; no external asset or tracing |
+| `core/designsystem/src/main/java/me/shadow/eclipse/core/designsystem/EclipseIcons.kt` | Original Compose vector geometry for navigation and Home actions | Eclipse Launcher project | Simple polygon geometry authored from scratch for this project; no SVG, font, or reference path data | Apache-2.0 with the project, subject to DQ-017 trademark clearance | Initial creation | P1 original work; no external asset or tracing |
 
-The Phase 1 mark does not incorporate game artwork, third-party logos, source-project marks, fonts, raster images, or generated imagery. It is original Eclipse Launcher artwork, not a representation of another product. It must not be described as trademark-cleared until DQ-017 closes.
+The Eclipse mark and Compose icon geometry do not incorporate game artwork, third-party logos, source-project marks, fonts, raster images, or generated imagery. They are original Eclipse Launcher artwork, not a representation of another product. They must not be described as trademark-cleared until DQ-017 closes.
 
 ## 9. Review gates
 
@@ -112,9 +113,9 @@ A failed gate blocks merge or release. Silence about an input’s origin is trea
 
 ## 10. Legal and policy file status
 
-The following files are required before release. Phase 1 status is recorded explicitly:
+The following files are required before release. Current implementation status is recorded explicitly:
 
-| File | Purpose | Phase 1 status |
+| File | Purpose | Current status |
 |---|---|---|
 | `LICENSE` | Project-wide Apache License 2.0 text. | Present |
 | `THIRD_PARTY_NOTICES.md` | Human-readable inventory of direct dependencies, licenses, versions, and sources. | Present; transitive inventory pending |

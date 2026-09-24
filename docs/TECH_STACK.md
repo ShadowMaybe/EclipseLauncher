@@ -1,7 +1,7 @@
 # EclipseLauncher technology stack
 
-**Baseline date:** 2026-09-23
-**Status:** Approved, stable baseline. This document records decisions only; it does not create an application or build.
+**Baseline date:** 2026-09-24
+**Status:** Approved baseline with Phase 2 design-system and Home-slice implementation recorded below.
 
 ## Build and platform baseline
 
@@ -41,6 +41,16 @@ AGP 9.4 lists **Gradle 9.6.0 as both its minimum and default version**. Gradle 9
 | Benchmark | 1.5.0 | 2026-09-09 | [Benchmark 1.5.0 release notes](https://developer.android.com/jetpack/androidx/releases/benchmark#1.5.0) | Current stable microbenchmark, macrobenchmark, and baseline-profile tooling. It is isolated to benchmark/test configuration and is not shipped in the application runtime. |
 | ProfileInstaller | 1.4.1 | 2024-10-02 | [ProfileInstaller 1.4.1 release notes](https://developer.android.com/jetpack/androidx/releases/profileinstaller#1.4.1) | Current stable runtime installer for ART baseline profiles, including multi-process recording support. Runtime and benchmark versions are kept compatible. |
 
+## Module boundaries
+
+| Module | Responsibility | Runtime dependencies |
+|---|---|---|
+| `:app` | Application identity, activity host, dependency assembly, and release variant configuration | AndroidX Activity Compose; project modules |
+| `:core:designsystem` | Central Material 3 theme, tokens, original vector geometry, and reusable UI primitives | Compose BOM, Material 3, Compose UI |
+| `:feature:home` | Home state contract, adaptive Home layout, previews, and Compose UI tests | `:core:designsystem`, Compose UI test artifacts |
+
+The feature module has no launcher repository or network dependency. Navigation and real state repositories are added behind interfaces in later phases.
+
 ## CI action baseline
 
 Actions are pinned to exact release tags. Commit SHAs may be substituted by a separately audited workflow-hardening update, but floating tags such as `@v7` are not approved.
@@ -52,6 +62,7 @@ Actions are pinned to exact release tags. Commit SHAs may be substituted by a se
 | `android-actions/setup-android` | 4.0.4 | 2026-09-17 | [Release v4.0.4](https://github.com/android-actions/setup-android/releases/tag/v4.0.4) | Installs the audited Android command-line tools and SDK packages reproducibly. |
 | `gradle/actions` | 6.3.0 | 2026-08-02 | [Release v6.3.0](https://github.com/gradle/actions/releases/tag/v6.3.0) | Exact stable Gradle setup, caching, validation, and dependency-submission action release. |
 | `softprops/action-gh-release` | 3.0.3 | 2026-08-30 | [Release v3.0.3](https://github.com/softprops/action-gh-release/releases/tag/v3.0.3) | Stable release-upload action for public GitHub releases; release signing credentials remain external. |
+| `reactivecircus/android-emulator-runner` | 2.38.0 | 2026-07-05 | [Release v2.38.0](https://github.com/ReactiveCircus/android-emulator-runner/releases/tag/v2.38.0) | Runs the connected Compose test suite on an ephemeral API 35 emulator; it publishes no test artifact. |
 
 ## GitHub Actions and release policy
 
@@ -85,6 +96,17 @@ GitHub Actions run `36036686843` completed successfully on 2026-09-24 for commit
 - no APK workflow artifact was uploaded.
 
 The workflow installs the API 37 compile platform through the official Android CLI beta channel while keeping `targetSdk 36`. The CI step inspects the generated APK identity and metadata before the runner is discarded. The signed release workflow remains untested by design until DQ-013 supplies valid signing values.
+
+## Phase 2 Actions verification
+
+The design-system and Home-slice milestone was verified in GitHub Actions on 2026-09-24:
+
+- CI run `36040467221` passed `testDebugUnitTest`, `lintDebug`, `assembleDebug`, and debug APK identity inspection;
+- UI-test run `36040467149` passed the connected Compose suite on an API 35 emulator, including semantics, disabled-state, and screenshot theme-contract checks;
+- the emulator workflow uses the pinned runner SHA and publishes no APK, screenshot, or test artifact;
+- the feature module remains offline and contains no launcher repository, network permission, or fabricated completion state.
+
+The Home slice uses the existing pinned Compose BOM and Material 3 version; no new runtime dependency was introduced. Screenshot/golden coverage will expand with each parity-critical destination.
 
 ## Compatibility governance
 

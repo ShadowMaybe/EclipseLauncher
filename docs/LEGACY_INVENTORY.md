@@ -749,7 +749,19 @@ The target is no longer empty. Phase 1 independently created the following found
 
 GitHub Actions run `36036686843` passed `testDebugUnitTest`, `lintDebug`, `assembleDebug`, and debug APK identity inspection on 2026-09-24. No APK was built locally. The signed release workflow has intentionally not been run because production signing values are still blocked by DQ-013.
 
-The 132-row parity ledger remains the implementation ledger. The minimal Phase 1 shell is a build/identity verification surface and does not mark any launcher workflow row implemented.
+The 132-row parity ledger remains the implementation ledger. The Phase 2 design-system/Home shell is a real prerequisite-state milestone, not a completed launcher workflow row; no row is promoted to `implemented` until its full behavior and verification contract passes.
+
+## 19. Phase 2 target state and verification
+
+Phase 2 independently added:
+
+- `:core:designsystem` with centralized Material 3 color roles, typography, shapes, dimensions, theme modes, original Compose icon geometry, and reusable components;
+- `:feature:home` with compact and wide Home presentations, an honest empty/prerequisite state, and no fake repository or navigation behavior;
+- previews for wide light/dark, compact, dynamic color, and enlarged text;
+- connected Compose semantics and screenshot theme-contract tests;
+- a pinned GitHub Actions emulator workflow that publishes no test, screenshot, or APK workflow artifact.
+
+GitHub Actions run `36040467221` passed unit tests, lint, debug assembly, and APK inspection. UI-test run `36040467149` passed the connected Compose suite on an API 35 emulator. The Home slice remains incomplete until navigation, repositories, device state restoration, and the remaining parity behavior are implemented.
 
 ## Final clean-room rule
 
