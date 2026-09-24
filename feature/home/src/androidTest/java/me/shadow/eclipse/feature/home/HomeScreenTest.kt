@@ -2,11 +2,15 @@ package me.shadow.eclipse.feature.home
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import me.shadow.eclipse.core.designsystem.EclipseTheme
+import me.shadow.eclipse.core.designsystem.ThemeMode
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -49,5 +53,21 @@ class HomeScreenTest {
         composeRule.onNodeWithText("Manage control layouts").assertIsNotEnabled()
         composeRule.onNodeWithText("Open instance directory").assertIsNotEnabled()
         composeRule.onNodeWithText("Share diagnostic logs").assertIsNotEnabled()
+    }
+
+    @Test
+    fun compactHomeScreenshotHasRenderedSurface() {
+        composeRule.setContent {
+            EclipseTheme(themeMode = ThemeMode.LIGHT, dynamicColor = false) {
+                HomeScreen(
+                    title = "Eclipse Launcher",
+                    state = HomeUiState(),
+                )
+            }
+        }
+
+        val screenshot = composeRule.onRoot().captureToImage()
+        assertTrue("Screenshot width must be positive", screenshot.width > 0)
+        assertTrue("Screenshot height must be positive", screenshot.height > 0)
     }
 }
