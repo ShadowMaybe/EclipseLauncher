@@ -59,12 +59,20 @@ jobs:
           [[ -f "${apk_path}" ]] || { printf 'Debug APK not found: %s\n' "${apk_path}" >&2; exit 1; }
           metadata="$(${ANDROID_HOME}/build-tools/36.0.0/aapt2 dump badging "${apk_path}")"
           printf '%s\n' "${metadata}"
-          grep -Fq "name='me.shadow.eclipse.debug'" <<< "${metadata}"
-          grep -Fq "versionCode='1'" <<< "${metadata}"
-          grep -Fq "versionName='0.1.0-debug'" <<< "${metadata}"
-          grep -Fq "sdkVersion:'26'" <<< "${metadata}"
-          grep -Fq "targetSdkVersion:'36'" <<< "${metadata}"
-          grep -Fq "application-label:'Eclipse Launcher'" <<< "${metadata}"
+          require_metadata() {
+            local expected="$1"
+            if ! grep -Fq "${expected}" <<< "${metadata}"; then
+              printf 'Missing APK metadata: %s\n' "${expected}" >&2
+              exit 1
+            fi
+            printf 'Verified APK metadata: %s\n' "${expected}"
+          }
+          require_metadata "name='me.shadow.eclipse.debug'"
+          require_metadata "versionCode='1'"
+          require_metadata "versionName='0.1.0-debug'"
+          require_metadata "minSdkVersion:'26'"
+          require_metadata "targetSdkVersion:'36'"
+          require_metadata "application-label:'Eclipse Launcher'"
           while IFS= read -r permission_line; do
             [[ -n "${permission_line}" ]] || continue
             if [[ "${permission_line}" != *"name='me.shadow.eclipse.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'"* ]]; then
