@@ -20,4 +20,6 @@ include(
     ":app",
     ":core:designsystem",
     ":feature:home",
+    ":feature:downloads",
+    ":feature:settings",
 )

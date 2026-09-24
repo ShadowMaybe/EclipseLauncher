@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_action_downloads">Downloads</string>
+    <string name="settings_action_settings">Settings</string>
+
+    <string name="settings_category_rendering">Rendering</string>
+    <string name="settings_category_controls">Controls</string>
+    <string name="settings_category_game_runtime">Game &amp; runtime</string>
+    <string name="settings_category_launcher">Launcher</string>
+    <string name="settings_category_accessibility_storage">Accessibility &amp; storage</string>
+
+    <string name="settings_rendering_title">No renderer selected</string>
+    <string name="settings_rendering_supporting">Built-in renderer choices and hardware compatibility checks will appear here.</string>
+    <string name="settings_controls_title">No control layout selected</string>
+    <string name="settings_controls_supporting">Control layouts and accessible input alternatives will appear here when configured.</string>
+    <string name="settings_game_runtime_title">No runtime configured</string>
+    <string name="settings_game_runtime_supporting">Runtime compatibility and memory settings will appear here when instance setup is available.</string>
+    <string name="settings_launcher_title">Launcher preferences are not configured</string>
+    <string name="settings_launcher_supporting">Downloads, appearance, diagnostics, and update preferences will appear here when enabled.</string>
+    <string name="settings_accessibility_storage_title">Accessibility and storage are not configured</string>
+    <string name="settings_accessibility_storage_supporting">Scoped storage, accessibility, and permission explanations will appear here when those features are connected.</string>
+</resources>
