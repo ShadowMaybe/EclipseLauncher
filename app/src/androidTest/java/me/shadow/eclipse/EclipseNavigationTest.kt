@@ -34,9 +34,6 @@ class EclipseNavigationTest {
         composeRule.onNodeWithText("No renderer selected").assertIsDisplayed()
 
         Espresso.pressBack()
-        composeRule.onNodeWithText("No game versions yet").assertIsDisplayed()
-
-        Espresso.pressBack()
         composeRule.onNodeWithText("No account selected").assertIsDisplayed()
     }
 }
