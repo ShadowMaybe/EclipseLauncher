@@ -16,4 +16,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "EclipseLauncher"
 
-include(":app")
+include(
+    ":app",
+    ":core:designsystem",
+    ":feature:home",
+)

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_action_downloads">Downloads</string>
+    <string name="home_action_settings">Settings</string>
+    <string name="home_action_about">About Eclipse Launcher</string>
+    <string name="home_action_about_supporting">Project information will be available when the navigation shell is enabled.</string>
+    <string name="home_action_controls">Manage control layouts</string>
+    <string name="home_action_controls_supporting">Available after control setup is completed.</string>
+    <string name="home_action_directory">Open instance directory</string>
+    <string name="home_action_directory_supporting">Choose an installed instance first.</string>
+    <string name="home_action_logs">Share diagnostic logs</string>
+    <string name="home_action_logs_supporting">Diagnostic logging is not initialized.</string>
+
+    <string name="home_tools_title">Launcher tools</string>
+    <string name="home_no_account_title">No account selected</string>
+    <string name="home_no_account_supporting">Add an account to enable online play.</string>
+    <string name="home_account_microsoft">Microsoft account</string>
+    <string name="home_account_local">Offline local account</string>
+    <string name="home_no_instance_title">No installed instance</string>
+    <string name="home_no_instance_supporting">Install a game version to enable launch.</string>
+    <string name="home_manage_instance">Manage selected instance</string>
+    <string name="home_launch">Launch</string>
+    <string name="home_launch_blocked_account">Select an account before launching.</string>
+    <string name="home_launch_blocked_instance">Install and select an instance before launching.</string>
+    <string name="home_launch_blocked_task">Wait for active launcher work to finish.</string>
+    <string name="home_launch_blocked_generic">Complete launcher setup before launching.</string>
+    <plurals name="home_active_tasks">
+        <item quantity="one">%d active task</item>
+        <item quantity="other">%d active tasks</item>
+    </plurals>
+</resources>
