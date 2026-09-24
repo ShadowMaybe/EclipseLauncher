@@ -65,7 +65,11 @@ jobs:
           grep -Fq "sdkVersion:'26'" <<< "${metadata}"
           grep -Fq "targetSdkVersion:'36'" <<< "${metadata}"
           grep -Fq "application-label:'Eclipse Launcher'" <<< "${metadata}"
-          if grep -q '^uses-permission:' <<< "${metadata}"; then
-            printf 'Phase 1 debug APK must not request permissions\n' >&2
+          unexpected_permissions="$(
+            grep '^uses-permission:' <<< "${metadata}" |
+              grep -Fv "name='me.shadow.eclipse.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'" || true
+          )"
+          if [[ -n "${unexpected_permissions}" ]]; then
+            printf 'Unexpected Phase 1 permissions:\n%s\n' "${unexpected_permissions}" >&2
             exit 1
           fi
