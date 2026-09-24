@@ -9,7 +9,7 @@
 - [x] Release application ID is `me.shadow.eclipse`.
 - [x] Debug application ID is `me.shadow.eclipse.debug`.
 - [x] Public source repository exists at `https://github.com/ShadowMaybe/EclipseLauncher`.
-- [x] Phase 2 source/resources/manifest contain no unexplained legacy identity.
+- [x] Phase 3 source/resources/manifest contain no unexplained legacy identity.
 - [x] Trademark review is recorded as a blocker rather than assumed complete.
 
 ## Build and CI
@@ -40,6 +40,7 @@
 
 - [x] Centralized Material 3 design-system module and token/component tests exist.
 - [x] Home compact/expanded shell, prerequisite states, previews, and Actions Compose tests exist.
+- [x] Top-level Downloads/Settings navigation, adaptive category controls, and Back behavior exist.
 - [ ] All 132 parity rows have final implemented/removed/replaced/unblocked status.
 - [ ] Real account, profile, version, runtime, download, renderer, control, diagnostics, and launch flows are verified on a device.
 - [ ] No fake or simulated success/progress paths remain.

@@ -1,7 +1,7 @@
 # EclipseLauncher technology stack
 
 **Baseline date:** 2026-09-24
-**Status:** Approved baseline with Phase 2 design-system and Home-slice implementation recorded below.
+**Status:** Approved baseline with Phase 3 navigation-shell and destination implementation recorded below.
 
 ## Build and platform baseline
 
@@ -45,11 +45,13 @@ AGP 9.4 lists **Gradle 9.6.0 as both its minimum and default version**. Gradle 9
 
 | Module | Responsibility | Runtime dependencies |
 |---|---|---|
-| `:app` | Application identity, activity host, dependency assembly, and release variant configuration | AndroidX Activity Compose; project modules |
-| `:core:designsystem` | Central Material 3 theme, tokens, original vector geometry, and reusable UI primitives | Compose BOM, Material 3, Compose UI |
+| `:app` | Application identity, activity host, top-level navigation, dependency assembly, and release variant configuration | AndroidX Activity Compose, Navigation Compose; project modules |
+| `:core:designsystem` | Central Material 3 theme, tokens, original vector geometry, category navigation, and reusable UI primitives | Compose BOM, Material 3, Compose UI |
 | `:feature:home` | Home state contract, adaptive Home layout, previews, and Compose UI tests | `:core:designsystem`, Compose UI test artifacts |
+| `:feature:downloads` | Downloads destination, category state, adaptive category navigation, and honest empty states | `:core:designsystem`, Compose UI test artifacts |
+| `:feature:settings` | Settings destination, category state, adaptive category navigation, and honest unavailable states | `:core:designsystem`, Compose UI test artifacts |
 
-The feature module has no launcher repository or network dependency. Navigation and real state repositories are added behind interfaces in later phases.
+The destination feature modules have no launcher repository or network dependency. Navigation and real state repositories are added behind interfaces in later phases.
 
 ## CI action baseline
 
@@ -104,9 +106,21 @@ The design-system and Home-slice milestone was verified in GitHub Actions on 202
 - CI run `36040467221` passed `testDebugUnitTest`, `lintDebug`, `assembleDebug`, and debug APK identity inspection;
 - UI-test run `36040467149` passed the connected Compose suite on an API 35 emulator, including semantics, disabled-state, and screenshot theme-contract checks;
 - the emulator workflow uses the pinned runner SHA and publishes no APK, screenshot, or test artifact;
-- the feature module remains offline and contains no launcher repository, network permission, or fabricated completion state.
+- the destination modules remain offline and contain no launcher repository, network permission, or fabricated completion state.
 
 The Home slice uses the existing pinned Compose BOM and Material 3 version; no new runtime dependency was introduced. Screenshot/golden coverage will expand with each parity-critical destination.
+
+## Phase 3 Actions verification
+
+The top-level navigation milestone was verified in GitHub Actions on 2026-09-24:
+
+- CI run `36043991257` passed `testDebugUnitTest`, `lintDebug`, `assembleDebug`, and APK identity inspection;
+- UI-test run `36043991071` passed the app navigation test plus all existing Compose tests on an API 35 emulator;
+- Home, Downloads, and Settings use one top-level Navigation Compose graph with stable leading-title/trailing-action ordering and no permanent bottom navigation;
+- Downloads and Settings category selection is local, saveable UI state with explicit empty/unavailable content; no remote source, fake progress, or placeholder success action is introduced;
+- the emulator workflow still publishes no test, screenshot, or APK workflow artifact.
+
+Signed release execution remains blocked by DQ-013, and the full launcher repositories and workflows remain later-phase work.
 
 ## Compatibility governance
 

@@ -146,3 +146,13 @@ The first target-owned UI milestone is intentionally not counted as a completed 
 - The empty state exposes no simulated account, instance, task, launch, or navigation result. Disabled actions carry an explanation and no enabled action can fall through to a no-op.
 - Previews cover wide light/dark, compact, dynamic color, and enlarged text. Actions runs `36040467149` passed the connected Compose tests, including a screenshot theme contract; run `36040467221` passed unit tests, lint, debug assembly, and APK inspection.
 - F01 and related state rows remain `replaced` until their full behavior, repository wiring, restoration, and device verification are complete.
+
+## Phase 3 evidence
+
+The navigation milestone is also intentionally not counted as a completed parity row:
+
+- `:app` owns a single Navigation Compose graph with Home as root and Downloads/Settings as real sibling destinations.
+- Top-level actions preserve title-leading and Downloads/Settings-trailing order without a permanent bottom navigation bar.
+- Downloads and Settings expose saveable category selection with adaptive tabs/rails and explicit empty or unavailable states; no remote source, fake progress, or simulated repository result is present.
+- Actions run `36043991071` passed the app navigation/Back test and all Compose tests; run `36043991257` passed unit tests, lint, debug assembly, and APK inspection.
+- A03, F04, F28, F35, and remaining destination rows remain `replaced` until their full behavior and verification contracts are complete.

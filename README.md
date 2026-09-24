@@ -14,7 +14,7 @@ It is not affiliated with, sponsored by, or endorsed by Mojang Studios or Micros
 
 ## Current status
 
-Phase 1 establishes the independent identity, Gradle/version-catalog foundation, legal files, original icon geometry, and CI/release workflows. Phase 2 adds the centralized Material 3 design system and an honest adaptive Home prerequisite-state slice with previews and connected Compose tests. The complete launcher functionality remains tracked in `docs/UI_PARITY_MATRIX.md`.
+Phase 1 establishes the independent identity, Gradle/version-catalog foundation, legal files, original icon geometry, and CI/release workflows. Phase 2 adds the centralized Material 3 design system and an honest adaptive Home prerequisite-state slice with previews and connected Compose tests. Phase 3 adds real top-level navigation to Downloads and Settings, with adaptive category controls and explicit unavailable states. The complete launcher functionality remains tracked in `docs/UI_PARITY_MATRIX.md`.
 
 See:
 

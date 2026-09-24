@@ -11,7 +11,8 @@ All notable changes to Eclipse Launcher are recorded here. The format is based o
 - Kotlin 2.4.20, Compose BOM 2026.09.00, Material 3, AGP 9.4.1, and Gradle 9.6.0 foundation.
 - Centralized Material 3 design-system module with accessible theme roles, dimensions, reusable components, and original Compose icon geometry.
 - Adaptive Home vertical slice with compact/expanded layouts, prerequisite empty states, previews, and disabled-action explanations.
-- Connected Compose semantics and screenshot theme-contract tests in GitHub Actions.
+- Top-level Home/Downloads/Settings navigation with adaptive category rails/tabs and honest destination empty states.
+- Connected Compose semantics, navigation/Back, and screenshot theme-contract tests in GitHub Actions.
 - Original Eclipse adaptive and monochrome launcher geometry with provenance.
 - Apache-2.0 license, direct third-party notices, legal review, provenance policy, and release checklist.
 - GitHub Actions CI for unit tests, lint, debug assembly, and APK identity inspection.

@@ -763,6 +763,18 @@ Phase 2 independently added:
 
 GitHub Actions run `36040467221` passed unit tests, lint, debug assembly, and APK inspection. UI-test run `36040467149` passed the connected Compose suite on an API 35 emulator. The Home slice remains incomplete until navigation, repositories, device state restoration, and the remaining parity behavior are implemented.
 
+## 20. Phase 3 target state and verification
+
+Phase 3 independently added the top-level navigation shell and two destination modules:
+
+- `:app` owns a Navigation Compose graph with Home as root and Downloads/Settings as sibling destinations;
+- Downloads and Settings use centralized adaptive category tabs/rails and saveable local category state;
+- destination content is explicit empty/unavailable state, with no remote source, arbitrary path, fake progress, or simulated repository result;
+- the app connected test covers top-level action navigation and Back-to-Home behavior;
+- all new source and resources use Eclipse-owned identity and original geometry.
+
+GitHub Actions run `36043991257` passed unit tests, lint, debug assembly, and APK inspection. UI-test run `36043991071` passed the connected app navigation and Compose suites on an API 35 emulator. Full destination repositories, persistence, and remaining parity rows are still pending.
+
 ## Final clean-room rule
 
 `/root/Project/ref/ZalithLauncher` is an external, read-only audit reference only. It is not part of `/root/Project/EclipseLauncher` and must never become a source dependency, vendored module, submodule, symlink, copied asset set, or implementation shortcut.

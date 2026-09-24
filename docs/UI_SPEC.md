@@ -618,3 +618,15 @@ Phase 2 establishes the first independently authored UI slice without claiming t
 - CI runs the unit/lint/debug verification and connected Compose tests on an Actions emulator. The test workflow does not publish screenshots or APKs as workflow artifacts.
 
 The Home slice is an implementation milestone, not a final parity disposition. F01, S08, S09, A03, and all navigation/repository rows remain subject to their complete behavior and verification requirements.
+
+## 19. Phase 3 implementation record
+
+Phase 3 establishes the stable top-level launcher shell and real destination navigation:
+
+- `:app` owns one Navigation Compose graph with Home as the start destination and Downloads/Settings as sibling top-level destinations.
+- Every top-level destination keeps the Eclipse Launcher title leading and Downloads/Settings actions trailing; no permanent bottom navigation is introduced.
+- Top-level navigation uses single-top restoration and returns to the root predictably. The connected Actions test covers Downloads, Settings, and Back-to-Home behavior.
+- `:feature:downloads` and `:feature:settings` provide saveable local category selection, adaptive tabs/rails, and explicit empty/unavailable content. They do not claim that version sources, settings persistence, rendering, or runtime repositories are connected.
+- Category selection and navigation are real state transitions; future repository actions must be injected behind interfaces rather than simulated in these screens.
+
+This milestone does not complete A03, F04, F28, F35, or the remaining parity rows; those still require full behavior, restoration, device, and accessibility verification.

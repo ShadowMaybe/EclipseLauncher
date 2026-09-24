@@ -1,7 +1,7 @@
 # Eclipse Launcher legal review
 
 **Review date:** 2026-09-24
-**Status:** Phase 2 design-system and Home-slice foundation passed CI; not a legal opinion or final publication clearance.
+**Status:** Phase 3 navigation shell and top-level destination foundation passed CI; not a legal opinion or final publication clearance.
 
 ## 1. Independent-project identity
 
@@ -39,7 +39,7 @@ Production Microsoft authentication is blocked until the owner supplies an Eclip
 
 ## 6. Network, privacy, and content sources
 
-The Phase 1 manifest requests no network permission and blocks cleartext traffic. Later network access requires an approved capability, TLS-only policy, cancellation/error behavior, and privacy disclosure.
+The current manifest requests no network permission and blocks cleartext traffic. Later network access requires an approved capability, TLS-only policy, cancellation/error behavior, and privacy disclosure.
 
 There is no advertising, analytics, telemetry, sponsor tracking, news feed, or social-feed integration. Remote content catalogs and mod-loader providers remain blocked until their API terms, keys, integrity model, attribution, and data flows are approved through DQ-015.
 
@@ -62,8 +62,9 @@ There is no advertising, analytics, telemetry, sponsor tracking, news feed, or s
 | No ads/analytics/telemetry/social/news code | Pass | No dependencies or manifest permissions added |
 | Clean-room provenance recorded | Pass | `docs/PROVENANCE.md` |
 | Material 3 design system and Home slice | Pass for milestone | `:core:designsystem`, `:feature:home`, previews, and synthetic empty state |
-| Debug build, unit test, lint, and APK identity | Pass | GitHub Actions run `36040467221` |
-| Connected Compose semantics and screenshot contract | Pass | GitHub Actions run `36040467149` |
+| Top-level navigation shell | Pass for milestone | `:app`, `:feature:downloads`, `:feature:settings`, and connected Back test |
+| Debug build, unit test, lint, and APK identity | Pass | GitHub Actions run `36043991257` |
+| Connected Compose semantics, navigation, and screenshot contract | Pass | GitHub Actions run `36043991071` |
 | Release APK publication path | Pass, pending secrets | Tag-only workflow verifies signature and publishes directly to GitHub Releases |
 | Trademark clearance | Blocked | DQ-017 |
 | Microsoft OAuth registration | Blocked | DQ-016 |
