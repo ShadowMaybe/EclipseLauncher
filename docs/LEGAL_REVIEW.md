@@ -1,7 +1,7 @@
 # Eclipse Launcher legal review
 
-**Review date:** 2026-09-23
-**Status:** Phase 1 foundation review; not a legal opinion or final publication clearance.
+**Review date:** 2026-09-24
+**Status:** Phase 1 foundation passed CI; not a legal opinion or final publication clearance.
 
 ## 1. Independent-project identity
 
@@ -61,6 +61,8 @@ There is no advertising, analytics, telemetry, sponsor tracking, news feed, or s
 | Game assets/credentials excluded | Pass | Empty/synthetic Phase 1 resources only |
 | No ads/analytics/telemetry/social/news code | Pass | No dependencies or manifest permissions added |
 | Clean-room provenance recorded | Pass | `docs/PROVENANCE.md` |
+| Debug build, unit test, and lint | Pass | GitHub Actions run 35902766542 |
+| Release APK publication path | Pass, pending secrets | Tag-only workflow verifies signature and publishes directly to GitHub Releases |
 | Trademark clearance | Blocked | DQ-017 |
 | Microsoft OAuth registration | Blocked | DQ-016 |
 | Official website/privacy/support endpoints | Blocked | DQ-007 and DQ-008 |

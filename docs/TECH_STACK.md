@@ -56,7 +56,7 @@ Actions are pinned to exact release tags. Commit SHAs may be substituted by a se
 ## GitHub Actions and release policy
 
 - Pull requests and pushes run verification jobs without publishing an APK workflow artifact.
-- Local development must not produce the release APK; GitHub Actions is the release build authority.
+- The local workspace is source-only: no Gradle build, test, lint, or APK assembly runs locally. GitHub Actions is the build authority.
 - A version tag such as `vX.Y.Z` triggers the release workflow after tests, lint, dependency verification, R8/resource shrinking, signing verification, and release-like checks pass.
 - The workflow writes the signed APK directly to the corresponding GitHub Release using `softprops/action-gh-release`.
 - The workflow must not use `actions/upload-artifact` for the release APK. APK/AAB inspection evidence may be attached to the Release as separate checksum/report files, but the APK itself is a Release asset.
@@ -72,6 +72,18 @@ The target had no Gradle wrapper or build scripts when the toolchain was selecte
 ```
 
 Result: exit 127, `./gradlew: No such file or directory`. This is the expected pre-Phase-1 failure and is not presented as a passing build.
+
+## Phase 1 Actions verification
+
+GitHub Actions run `35902766542` completed successfully on 2026-09-23 for commit `770523079549f427e6d0caf281ce2e7dd6f0f8ae`:
+
+- official Gradle wrapper verification passed;
+- `testDebugUnitTest` passed;
+- `lintDebug` passed;
+- `assembleDebug` passed;
+- no APK workflow artifact was uploaded.
+
+The workflow installs the API 37 compile platform through the official Android CLI beta channel while keeping `targetSdk 36`. A subsequent CI step inspects the generated APK identity and metadata before the runner is discarded. The signed release workflow remains untested by design until DQ-013 supplies valid signing values.
 
 ## Compatibility governance
 

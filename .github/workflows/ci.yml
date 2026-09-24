@@ -50,3 +50,22 @@ jobs:
 
       - name: Run unit tests, lint, and debug assembly
         run: ./gradlew --no-daemon --stacktrace testDebugUnitTest lintDebug assembleDebug
+
+      - name: Inspect debug APK identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk_path="app/build/outputs/apk/debug/app-debug.apk"
+          [[ -f "${apk_path}" ]] || { printf 'Debug APK not found: %s\n' "${apk_path}" >&2; exit 1; }
+          metadata="$(${ANDROID_HOME}/build-tools/36.0.0/aapt2 dump badging "${apk_path}")"
+          printf '%s\n' "${metadata}"
+          grep -Fq "name='me.shadow.eclipse.debug'" <<< "${metadata}"
+          grep -Fq "versionCode='1'" <<< "${metadata}"
+          grep -Fq "versionName='0.1.0-debug'" <<< "${metadata}"
+          grep -Fq "sdkVersion:'26'" <<< "${metadata}"
+          grep -Fq "targetSdkVersion:'36'" <<< "${metadata}"
+          grep -Fq "application-label:'Eclipse Launcher'" <<< "${metadata}"
+          if grep -q '^uses-permission:' <<< "${metadata}"; then
+            printf 'Phase 1 debug APK must not request permissions\n' >&2
+            exit 1
+          fi

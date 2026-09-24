@@ -110,24 +110,26 @@ A change is provenance-clean only when reviewers can answer “yes” to all app
 
 A failed gate blocks merge or release. Silence about an input’s origin is treated as a failed gate.
 
-## 10. Planned legal and policy files
+## 10. Legal and policy file status
 
-The following files are planned for later phases and must be reviewed before release:
+The following files are required before release. Phase 1 status is recorded explicitly:
 
-| Planned file | Purpose |
-|---|---|
-| `LICENSE` | Project-wide Apache License 2.0 text and copyright notice. |
-| `NOTICE` | Required project attribution and third-party notices, if applicable. |
-| `THIRD_PARTY_NOTICES.md` | Human-readable inventory of dependencies, assets, licenses, versions, and required attributions. |
-| `LICENSES/` | Verbatim copies or references for third-party licenses where required. |
-| `SBOM.spdx.json` | Machine-readable software bill of materials generated from approved dependencies. |
-| `PRIVACY.md` | Plain-language app privacy disclosures, including authentication and network data flows. |
-| `SECURITY.md` | Supported versions, reporting channel, and coordinated disclosure policy. |
-| `CONTRIBUTING.md` | Contribution, provenance, licensing, and clean-room review requirements. |
-| `CODE_OF_CONDUCT.md` | Community expectations and enforcement contact, if public contributions are accepted. |
-| `TRADEMARK_POLICY.md` | Permission and prohibited-use policy for approved EclipseLauncher branding. |
+| File | Purpose | Phase 1 status |
+|---|---|---|
+| `LICENSE` | Project-wide Apache License 2.0 text. | Present |
+| `THIRD_PARTY_NOTICES.md` | Human-readable inventory of direct dependencies, licenses, versions, and sources. | Present; transitive inventory pending |
+| `docs/LEGAL_REVIEW.md` | Trademark, non-affiliation, provenance, signing, and release review. | Present; publication blockers remain |
+| `docs/RELEASE_CHECKLIST.md` | Release gates, owners, and unresolved issues. | Present |
+| `NOTICE` | Required project attribution and third-party notices, if applicable. | Determine after final dependency review |
+| `LICENSES/` | Verbatim third-party license texts where required. | Pending final dependency review |
+| `SBOM.spdx.json` | Machine-readable software bill of materials. | Pending Phase 5/6 dependency lock |
+| `PRIVACY.md` | Plain-language authentication and network data disclosures. | Pending network feature review |
+| `SECURITY.md` | Supported versions, reporting channel, and coordinated disclosure. | Pending support-channel approval |
+| `CONTRIBUTING.md` | Contribution, provenance, licensing, and clean-room requirements. | Pending public-contribution policy |
+| `CODE_OF_CONDUCT.md` | Community expectations and enforcement contact. | Pending public-contribution policy |
+| `TRADEMARK_POLICY.md` | Permission and prohibited-use policy for approved branding. | Blocked by DQ-017 |
 
-Until those files are created, this file records their intent; their absence is not approval to omit required legal attribution.
+Absence of a pending file is not approval to omit required attribution or legal review.
 
 ## 11. Path A completion rule
 

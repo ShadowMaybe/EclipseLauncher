@@ -35,7 +35,7 @@ At audit start, `/root/Project/EclipseLauncher` contained no files or directorie
 | Databases/data packs | 0 | No database copied |
 | Dependency declarations | 0 | No dependency selected |
 | Local JAR/AAR files | 0 | No binary copied |
-| License/notice files | 0 | Apache-2.0 is approved; the root legal files are scheduled for Phase 1 after the Phase 0 documentation gate |
+| License/notice files | 0 | Apache-2.0 and direct-dependency notices were added during Phase 1 |
 | Tests | 0 | No test source set or test created |
 | CI workflows | 0 | No workflow copied or created |
 | Screens/activities/fragments | 0 | No app screen created |
@@ -726,12 +726,30 @@ These are legacy blockers, not candidate target dependencies.
 Before the corresponding later implementation phases begin, the following must be independently established:
 
 1. The original target architecture and package structure (approved for Phase 1).
-2. Apache-2.0-compatible dependency implementation and SBOM process (policy approved; files pending Phase 1).
+2. Apache-2.0-compatible dependency implementation and SBOM process (Phase 1 policy and direct notices complete; final transitive SBOM remains a release task).
 3. Original visual identity and asset provenance (direction approved; trademark/legal clearance remains a release dependency).
 4. New signing, OAuth, update, and support identities where those features are enabled.
 5. Secure account and network implementation.
 6. Test strategy with synthetic data.
 7. Phase-by-phase verification that no legacy source, binary, data, link, social identity, news/sponsor system, ad/analytics/telemetry integration, Easter egg, sample, or debug trace has entered the target.
+
+## 18. Phase 1 target state and verification
+
+The target is no longer empty. Phase 1 independently created the following foundation:
+
+- public repository `https://github.com/ShadowMaybe/EclipseLauncher`;
+- one Android application module under `me.shadow.eclipse`;
+- Gradle 9.6.0 wrapper with an official distribution SHA-256 checksum;
+- AGP 9.4.1, Kotlin/Compose compiler 2.4.20, compile SDK 37, target SDK 36, and minimum SDK 26;
+- Compose BOM 2026.09.00 and Material 3 dependencies;
+- an original adaptive/monochrome Eclipse mark with provenance;
+- Apache-2.0 `LICENSE`, `THIRD_PARTY_NOTICES.md`, and `docs/LEGAL_REVIEW.md`;
+- CI verification without workflow-artifact publication;
+- a tag-only signed-release workflow that publishes directly to GitHub Releases.
+
+GitHub Actions run `35902766542` passed `testDebugUnitTest`, `lintDebug`, and `assembleDebug` on 2026-09-23. No APK was built locally. The signed release workflow has intentionally not been run because production signing values are still blocked by DQ-013.
+
+The 132-row parity ledger remains the implementation ledger. The minimal Phase 1 shell is a build/identity verification surface and does not mark any launcher workflow row implemented.
 
 ## Final clean-room rule
 

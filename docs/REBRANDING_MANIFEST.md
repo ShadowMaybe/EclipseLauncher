@@ -274,25 +274,25 @@ Status values in the required `Verified` column:
 | `.github/workflows/android.yml` | CI build file | Remove | No legacy CI; future CI must be newly authored with tests, lint, dependency/license checks, and secure signing | `/root/Project/ref/ZalithLauncher/.github/workflows/android.yml` | Checked |
 | Five-ABI legacy release/debug matrix | CI/build behavior | Remove | Independently select target ABIs and test coverage | `/root/Project/ref/ZalithLauncher/.github/workflows/android.yml` | Checked |
 | Legacy `assembleRelease` / `assembleDebug` workflow commands | Build command | Remove | Future commands and signing paths must be target-owned | `/root/Project/ref/ZalithLauncher/.github/workflows/android.yml` | Checked |
-| No conventional application unit-test source set | Test finding | Preserve target absence until new tests exist | Future tests must be original and requirement-based | `/root/Project/ref/ZalithLauncher/ZalithLauncher/src/test/` | Checked — path not present |
-| No conventional application instrumentation-test source set | Test finding | Preserve target absence until new tests exist | Future tests must be original and synthetic-data based | `/root/Project/ref/ZalithLauncher/ZalithLauncher/src/androidTest/` | Checked — path not present |
-| No explicit test/lint/license-scan CI job | CI gap | Do not copy | Future CI must include appropriate verification | `/root/Project/ref/ZalithLauncher/.github/workflows/android.yml` | Finding |
-| `jre_lwjgl3glfw` source/module | Module/source set | Remove | No legacy helper module; future runtime architecture must be independently selected | `/root/Project/ref/ZalithLauncher/jre_lwjgl3glfw/` | Checked |
-| `ZalithLauncher` Android module | Module/source set | Remove | A future target module may exist under an independently selected build name using `me.shadow.eclipse` | `/root/Project/ref/ZalithLauncher/ZalithLauncher/` | Checked |
-| Legacy generated source set | Build source set | Remove | No legacy generated package/path | `/root/Project/ref/ZalithLauncher/ZalithLauncher/build.gradle.kts` | Checked |
+| No conventional application unit-test source set | Test finding | Replace | Phase 1 adds an original application-identity unit test; further repository tests are independently designed | `/root/Project/EclipseLauncher/app/src/test/` | Checked |
+| No conventional application instrumentation-test source set | Test gap | Replace in later UI phases | Add original Compose/navigation tests; do not copy reference fixtures or layouts | `/root/Project/EclipseLauncher/app/src/androidTest/` | Pending Phase 2/3 |
+| No explicit test/lint CI job | CI gap | Replace | CI now runs unit tests, lint, and debug assembly in GitHub Actions without publishing workflow artifacts | `/root/Project/EclipseLauncher/.github/workflows/ci.yml` | Checked — run 35902766542 passed |
+| `jre_lwjgl3glfw` source/module | Module/source set | Remove | No legacy helper module; target begins with one independently configured app module | `/root/Project/ref/ZalithLauncher/jre_lwjgl3glfw/` | Checked |
+| `ZalithLauncher` Android module | Module/source set | Replace | Target app module is `:app` under `me.shadow.eclipse` | `/root/Project/EclipseLauncher/app/` | Checked |
+| Legacy generated source set | Build source set | Remove | Target uses no legacy generated package or path | `/root/Project/EclipseLauncher/app/build.gradle.kts` | Checked |
 
-## Mandatory target verification before any implementation
+## Mandatory target verification
 
 | Old occurrence | Type | Action | New value or removal reason | File/resource | Verified |
 |---|---|---|---|---|---|
-| Any legacy occurrence listed in this manifest | Release-gate check | Block release | Fail scanning/build if prohibited old user-facing names, IDs, URLs, assets, binaries, or data enter target | `/root/Project/EclipseLauncher` | Unchecked — repeat when target implementation begins |
-| Any dependency or binary copied from the legacy path | Provenance check | Block release | Artifact must have independent source, version, hash, license, notice, and vulnerability record | `/root/Project/EclipseLauncher` | Unchecked — no target dependencies selected |
-| Any ads/analytics/telemetry/sponsor/news/social integration | Policy check | Block release | Prohibited by approved target policy | `/root/Project/EclipseLauncher` | Unchecked — repeat on every dependency/build change |
-| Any Easter egg or copied sample | Policy/provenance check | Block release | Prohibited; future fixtures must be original and synthetic | `/root/Project/EclipseLauncher` | Unchecked — repeat during review |
-| Any copied legacy source or direct translation | Clean-room check | Block release | Source must be independently implemented from approved requirements/public interfaces | `/root/Project/EclipseLauncher` | Unchecked — implementation not started |
-| Any missing target Apache-2.0 or third-party notice | License check | Block release | Add the root Apache-2.0 license and complete dependency notices in Phase 1 before any distributable build | `/root/Project/EclipseLauncher` | Finding — Phase 0 intentionally creates no legal/build files |
-| Any use of `me.shadow.eclipse.debug` in release | Build-identity check | Block release | Debug ID is approved only for the debug variant | `/root/Project/EclipseLauncher` | Unchecked — future build not created |
-| Any user-facing occurrence of a legacy name | Rebranding check | Block release | Legacy names are allowed only in audit/legal records, never app copy or runtime identity | `/root/Project/EclipseLauncher` | Unchecked — target currently contains only the seven approved Phase 0 documents |
+| Any legacy occurrence listed in this manifest | Release-gate check | Block release | Fail scanning/build if prohibited old user-facing names, IDs, URLs, assets, binaries, or data enter target | `/root/Project/EclipseLauncher` | Checked for Phase 1 source/resources/manifest; repeat every phase |
+| Any dependency or binary copied from the legacy path | Provenance check | Block release | Artifact must have independent source, version, hash, license, notice, and vulnerability record | `/root/Project/EclipseLauncher` | Checked — dependencies come from official repositories; wrapper hash recorded |
+| Any ads/analytics/telemetry/sponsor/news/social integration | Policy check | Block release | Prohibited by approved target policy | `/root/Project/EclipseLauncher` | Checked for Phase 1; repeat on every dependency/build change |
+| Any Easter egg or copied sample | Policy/provenance check | Block release | Prohibited; fixtures and assets must be original and synthetic | `/root/Project/EclipseLauncher` | Checked for Phase 1; repeat during review |
+| Any copied legacy source or direct translation | Clean-room check | Block release | Source must be independently implemented from approved requirements/public interfaces | `/root/Project/EclipseLauncher` | Checked for Phase 1 |
+| Any missing target Apache-2.0 or direct third-party notice | License check | Block release | Root license and direct notices are present; final transitive notices remain a release gate | `/root/Project/EclipseLauncher` | Checked for Phase 1 |
+| Any use of `me.shadow.eclipse.debug` in release | Build-identity check | Block release | Debug ID is approved only for the debug variant; release workflow checks `me.shadow.eclipse` | `/root/Project/EclipseLauncher` | Checked in workflow configuration; signed release pending secrets |
+| Any user-facing occurrence of a legacy name | Rebranding check | Block release | Legacy names are allowed only in audit/legal records, never app copy or runtime identity | `/root/Project/EclipseLauncher` | Checked for app source/resources/manifest |
 
 ## Final manifest rule
 
