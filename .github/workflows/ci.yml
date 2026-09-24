@@ -65,11 +65,11 @@ jobs:
           grep -Fq "sdkVersion:'26'" <<< "${metadata}"
           grep -Fq "targetSdkVersion:'36'" <<< "${metadata}"
           grep -Fq "application-label:'Eclipse Launcher'" <<< "${metadata}"
-          unexpected_permissions="$(
-            grep '^uses-permission:' <<< "${metadata}" |
-              grep -Fv "name='me.shadow.eclipse.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'" || true
-          )"
-          if [[ -n "${unexpected_permissions}" ]]; then
-            printf 'Unexpected Phase 1 permissions:\n%s\n' "${unexpected_permissions}" >&2
-            exit 1
-          fi
+          while IFS= read -r permission_line; do
+            [[ -n "${permission_line}" ]] || continue
+            if [[ "${permission_line}" != *"name='me.shadow.eclipse.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'"* ]]; then
+              printf 'Unexpected Phase 1 permission: %s\n' "${permission_line}" >&2
+              exit 1
+            fi
+          done < <(grep '^uses-permission:' <<< "${metadata}" || true)
+          printf 'APK identity inspection: PASS\n'
