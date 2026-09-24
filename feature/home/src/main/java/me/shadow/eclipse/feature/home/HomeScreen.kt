@@ -389,7 +389,6 @@ private fun HomeCompactPreview() {
 
 @Preview(
     name = "Home dynamic large font",
-    api = 31,
     widthDp = 600,
     heightDp = 960,
     fontScale = 2f,
