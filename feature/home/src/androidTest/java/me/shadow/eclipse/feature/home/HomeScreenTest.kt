@@ -1,15 +1,18 @@
 package me.shadow.eclipse.feature.home
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.captureToImage
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import me.shadow.eclipse.core.designsystem.EclipseTheme
 import me.shadow.eclipse.core.designsystem.ThemeMode
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -56,9 +59,13 @@ class HomeScreenTest {
     }
 
     @Test
-    fun compactHomeScreenshotHasRenderedSurface() {
+    fun compactHomeScreenshotHasRenderedThemeContract() {
+        val darkTheme = mutableStateOf(false)
         composeRule.setContent {
-            EclipseTheme(themeMode = ThemeMode.LIGHT, dynamicColor = false) {
+            EclipseTheme(
+                themeMode = if (darkTheme.value) ThemeMode.DARK else ThemeMode.LIGHT,
+                dynamicColor = false,
+            ) {
                 HomeScreen(
                     title = "Eclipse Launcher",
                     state = HomeUiState(),
@@ -66,8 +73,16 @@ class HomeScreenTest {
             }
         }
 
-        val screenshot = composeRule.onRoot().captureToImage()
-        assertTrue("Screenshot width must be positive", screenshot.width > 0)
-        assertTrue("Screenshot height must be positive", screenshot.height > 0)
+        val lightScreenshot = composeRule.onRoot().captureToImage().toPixelMap()
+        composeRule.runOnUiThread { darkTheme.value = true }
+        composeRule.waitForIdle()
+        val darkScreenshot = composeRule.onRoot().captureToImage().toPixelMap()
+
+        assertTrue("Screenshot width must be positive", lightScreenshot.width > 0)
+        assertTrue("Screenshot height must be positive", lightScreenshot.height > 0)
+        assertFalse(
+            "Light and dark theme screenshots must not be identical",
+            lightScreenshot.buffer.contentEquals(darkScreenshot.buffer),
+        )
     }
 }
