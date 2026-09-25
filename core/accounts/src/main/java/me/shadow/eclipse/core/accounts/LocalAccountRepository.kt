@@ -16,7 +16,7 @@ private val Context.accountDataStore: DataStore<Preferences> by preferencesDataS
     name = "eclipse_accounts",
 )
 
-class LocalAccountRepository private constructor(
+class LocalAccountRepository internal constructor(
     private val dataStore: DataStore<Preferences>,
 ) : AccountRepository {
     override val accounts: Flow<List<Account>> = dataStore.data.map { preferences ->
