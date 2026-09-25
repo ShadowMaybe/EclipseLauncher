@@ -70,3 +70,9 @@ jobs:
               find app feature core -type f -name 'TEST-*.xml' -print -exec cat {} \;
             fi
             exit "$status"
+
+      - name: Print connected test reports
+        if: always()
+        shell: bash
+        run: |
+          find app feature core -type f -name 'TEST-*.xml' -print -exec cat {} \;
