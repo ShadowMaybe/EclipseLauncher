@@ -58,7 +58,7 @@ class EclipseNavigationTest {
         composeRule.waitForIdle()
         composeRule.onNodeWithText("Test Player").assertIsDisplayed()
 
-        composeRule.onNodeWithContentDescription("Remove account").performClick()
+        composeRule.onNodeWithContentDescription("Remove account", useUnmergedTree = true).performClick()
         composeRule.onNode(hasText("Remove") and hasClickAction()).performClick()
         composeRule.waitForIdle()
         composeRule.onNodeWithText("No accounts yet").assertIsDisplayed()

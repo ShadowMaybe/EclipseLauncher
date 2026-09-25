@@ -67,6 +67,6 @@ jobs:
             ./gradlew --no-daemon --stacktrace --info connectedDebugAndroidTest
             status=$?
             if [ "$status" -ne 0 ]; then
-              find . -path '*/build/outputs/androidTest-results/*' -type f -name '*.xml' -print -exec cat {} \;
+              find app feature core -type f -name 'TEST-*.xml' -print -exec cat {} \;
             fi
             exit "$status"
