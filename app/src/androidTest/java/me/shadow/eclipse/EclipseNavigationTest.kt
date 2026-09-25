@@ -1,11 +1,10 @@
 package me.shadow.eclipse
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
-import androidx.compose.ui.test.isClickable
 import androidx.compose.ui.test.junit4.v2.createComposeRule
-import androidx.compose.ui.test.onNode
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -50,7 +49,7 @@ class EclipseNavigationTest {
             }
         }
 
-        composeRule.onNode(hasText("No account selected") and isClickable()).performClick()
+        composeRule.onNode(hasText("No account selected") and hasClickAction()).performClick()
         composeRule.onNodeWithText("No accounts yet").assertIsDisplayed()
 
         composeRule.onNodeWithText("Add offline account").performClick()
@@ -60,7 +59,7 @@ class EclipseNavigationTest {
         composeRule.onNodeWithText("Test Player").assertIsDisplayed()
 
         composeRule.onNodeWithContentDescription("Remove account").performClick()
-        composeRule.onNode(hasText("Remove") and isClickable()).performClick()
+        composeRule.onNode(hasText("Remove") and hasClickAction()).performClick()
         composeRule.waitForIdle()
         composeRule.onNodeWithText("No accounts yet").assertIsDisplayed()
     }
