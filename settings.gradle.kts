@@ -19,7 +19,9 @@ rootProject.name = "EclipseLauncher"
 include(
     ":app",
     ":core:designsystem",
+    ":core:accounts",
     ":feature:home",
+    ":feature:accounts",
     ":feature:downloads",
     ":feature:settings",
 )

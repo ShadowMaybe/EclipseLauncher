@@ -57,6 +57,46 @@ object EclipseIcons {
         close()
     }
 
+    val Back = eclipseIcon("EclipseBack") {
+        moveTo(20f, 11f)
+        lineTo(13f, 11f)
+        lineTo(18f, 6f)
+        lineTo(16f, 4f)
+        lineTo(8f, 12f)
+        lineTo(16f, 20f)
+        lineTo(18f, 18f)
+        lineTo(13f, 13f)
+        lineTo(20f, 13f)
+        close()
+    }
+
+    val Delete = eclipseIcon("EclipseDelete") {
+        moveTo(9f, 3f)
+        lineTo(15f, 3f)
+        lineTo(15f, 5f)
+        lineTo(20f, 5f)
+        lineTo(20f, 7f)
+        lineTo(4f, 7f)
+        lineTo(4f, 5f)
+        lineTo(9f, 5f)
+        close()
+        moveTo(6f, 8f)
+        lineTo(18f, 8f)
+        lineTo(17f, 21f)
+        lineTo(7f, 21f)
+        close()
+        moveTo(10f, 10f)
+        lineTo(12f, 10f)
+        lineTo(12f, 19f)
+        lineTo(10f, 19f)
+        close()
+        moveTo(14f, 10f)
+        lineTo(16f, 10f)
+        lineTo(16f, 19f)
+        lineTo(14f, 19f)
+        close()
+    }
+
     val Info = eclipseIcon("EclipseInfo") {
         moveTo(10f, 3f)
         lineTo(14f, 3f)

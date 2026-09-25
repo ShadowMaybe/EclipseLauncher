@@ -96,7 +96,9 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":core:accounts"))
     implementation(project(":core:designsystem"))
+    implementation(project(":feature:accounts"))
     implementation(project(":feature:downloads"))
     implementation(project(":feature:home"))
     implementation(project(":feature:settings"))

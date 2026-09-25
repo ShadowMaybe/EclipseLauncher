@@ -1,5 +1,6 @@
 package me.shadow.eclipse.core.designsystem
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
@@ -31,9 +34,27 @@ fun EclipseLauncherTopBar(
     settingsContentDescription: String,
     onDownloads: (() -> Unit)?,
     onSettings: (() -> Unit)?,
+    onBack: (() -> Unit)? = null,
+    backContentDescription: String? = null,
     modifier: Modifier = Modifier,
 ) {
+    val backAction = onBack
+    val backDescription = backContentDescription
+    require(backAction == null || backDescription != null) {
+        "A nested top bar action requires a content description"
+    }
+
     TopAppBar(
+        navigationIcon = {
+            if (backAction != null) {
+                IconButton(onClick = backAction) {
+                    Icon(
+                        imageVector = EclipseIcons.Back,
+                        contentDescription = backDescription,
+                    )
+                }
+            }
+        },
         title = {
             Text(
                 text = title,
@@ -126,11 +147,21 @@ fun EclipseStatusPanel(
     icon: ImageVector,
     title: String,
     supportingText: String,
+    onClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
     trailingContent: (@Composable () -> Unit)? = null,
 ) {
+    val clickableModifier = if (onClick != null) {
+        Modifier
+            .clickable(role = Role.Button, onClick = onClick)
+            .semantics(mergeDescendants = true) {}
+    } else {
+        Modifier
+    }
     Surface(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .then(clickableModifier),
         color = MaterialTheme.colorScheme.surfaceContainer,
         contentColor = MaterialTheme.colorScheme.onSurface,
         shape = MaterialTheme.shapes.medium,

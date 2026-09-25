@@ -1,10 +1,15 @@
 package me.shadow.eclipse
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasSetTextAction
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isClickable
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNode
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import me.shadow.eclipse.core.designsystem.EclipseTheme
@@ -35,5 +40,28 @@ class EclipseNavigationTest {
 
         Espresso.pressBack()
         composeRule.onNodeWithText("No account selected").assertIsDisplayed()
+    }
+
+    @Test
+    fun offlineLocalAccountCanBeCreatedAndRemoved() {
+        composeRule.setContent {
+            EclipseTheme(dynamicColor = false) {
+                EclipseApp()
+            }
+        }
+
+        composeRule.onNode(hasText("No account selected") and isClickable()).performClick()
+        composeRule.onNodeWithText("No accounts yet").assertIsDisplayed()
+
+        composeRule.onNodeWithText("Add offline account").performClick()
+        composeRule.onNode(hasSetTextAction()).performTextInput("Test Player")
+        composeRule.onNodeWithText("Create account").performClick()
+        composeRule.waitForIdle()
+        composeRule.onNodeWithText("Test Player").assertIsDisplayed()
+
+        composeRule.onNodeWithContentDescription("Remove account").performClick()
+        composeRule.onNode(hasText("Remove") and isClickable()).performClick()
+        composeRule.waitForIdle()
+        composeRule.onNodeWithText("No accounts yet").assertIsDisplayed()
     }
 }

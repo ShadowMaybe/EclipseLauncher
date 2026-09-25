@@ -45,6 +45,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     onDownloads: (() -> Unit)? = null,
     onSettings: (() -> Unit)? = null,
+    onAccounts: (() -> Unit)? = null,
     onAction: ((HomeAction) -> Unit)? = null,
     onLaunch: (() -> Unit)? = null,
     onManageInstance: (() -> Unit)? = null,
@@ -72,6 +73,7 @@ fun HomeScreen(
                     onAction = onAction,
                     onLaunch = onLaunch,
                     onManageInstance = onManageInstance,
+                    onAccounts = onAccounts,
                 )
             } else {
                 HomeCompactLayout(
@@ -79,6 +81,7 @@ fun HomeScreen(
                     onAction = onAction,
                     onLaunch = onLaunch,
                     onManageInstance = onManageInstance,
+                    onAccounts = onAccounts,
                 )
             }
         }
@@ -91,6 +94,7 @@ private fun HomeWideLayout(
     onAction: ((HomeAction) -> Unit)?,
     onLaunch: (() -> Unit)?,
     onManageInstance: (() -> Unit)?,
+    onAccounts: (() -> Unit)?,
 ) {
     Row(modifier = Modifier.fillMaxSize()) {
         Surface(
@@ -118,6 +122,7 @@ private fun HomeWideLayout(
                 state = state,
                 onLaunch = onLaunch,
                 onManageInstance = onManageInstance,
+                onAccounts = onAccounts,
                 modifier = Modifier.fillMaxSize(),
             )
         }
@@ -130,6 +135,7 @@ private fun HomeCompactLayout(
     onAction: ((HomeAction) -> Unit)?,
     onLaunch: (() -> Unit)?,
     onManageInstance: (() -> Unit)?,
+    onAccounts: (() -> Unit)?,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -137,7 +143,10 @@ private fun HomeCompactLayout(
         verticalArrangement = Arrangement.spacedBy(EclipseDimensions.SpaceMedium),
     ) {
         item(key = "account") {
-            AccountStatus(state = state)
+            AccountStatus(
+                state = state,
+                onAccounts = onAccounts,
+            )
         }
         item(key = "instance") {
             InstanceStatus(
@@ -195,6 +204,7 @@ private fun LaunchPane(
     state: HomeUiState,
     onLaunch: (() -> Unit)?,
     onManageInstance: (() -> Unit)?,
+    onAccounts: (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -204,6 +214,7 @@ private fun LaunchPane(
         Spacer(modifier = Modifier.weight(1f))
         AccountStatus(
             state = state,
+            onAccounts = onAccounts,
             modifier = Modifier.widthIn(max = EclipseDimensions.ContentMaxWidth),
         )
         Spacer(modifier = Modifier.weight(1f))
@@ -225,6 +236,7 @@ private fun LaunchPane(
 @Composable
 private fun AccountStatus(
     state: HomeUiState,
+    onAccounts: (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
     val accountName = state.accountName
@@ -237,6 +249,7 @@ private fun AccountStatus(
         } else {
             stringResource(R.string.home_no_account_supporting)
         },
+        onClick = onAccounts,
         modifier = modifier,
     )
 }
