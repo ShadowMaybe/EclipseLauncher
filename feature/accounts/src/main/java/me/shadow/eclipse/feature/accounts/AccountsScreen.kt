@@ -35,7 +35,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -65,7 +64,9 @@ fun AccountsRoute(
     val viewModel: AccountsViewModel = viewModel(factory = factory)
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
-    val context = LocalContext.current
+    val eventMessages = AccountEvent.entries.associateWith { event ->
+        stringResource(event.messageResource())
+    }
     var addDialogVisible by rememberSaveable { mutableStateOf(false) }
     var pendingDeleteId by rememberSaveable { mutableStateOf<String?>(null) }
 
@@ -86,7 +87,7 @@ fun AccountsRoute(
         onRemoveAccount = viewModel::removeAccount,
     )
 
-    LaunchedEffect(viewModel, context) {
+    LaunchedEffect(viewModel, eventMessages) {
         viewModel.events.collect { event ->
             if (event == AccountEvent.ADDED) {
                 addDialogVisible = false
@@ -94,7 +95,7 @@ fun AccountsRoute(
             if (event == AccountEvent.REMOVED) {
                 pendingDeleteId = null
             }
-            snackbarHostState.showSnackbar(context.getString(event.messageResource()))
+            snackbarHostState.showSnackbar(eventMessages.getValue(event))
         }
     }
 }
