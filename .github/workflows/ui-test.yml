@@ -62,14 +62,7 @@ jobs:
           disk-size: 6G
           disable-animations: true
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
-          script: |
-            set +e
-            ./gradlew --no-daemon --stacktrace --info connectedDebugAndroidTest
-            status=$?
-            if [ "$status" -ne 0 ]; then
-              find app feature core -type f -name 'TEST-*.xml' -print -exec cat {} \;
-            fi
-            exit "$status"
+          script: ./gradlew --no-daemon --stacktrace --info connectedDebugAndroidTest
 
       - name: Print connected test reports
         if: always()
