@@ -62,4 +62,4 @@ jobs:
           disk-size: 6G
           disable-animations: true
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
-          script: ./gradlew --no-daemon --stacktrace connectedDebugAndroidTest
+          script: ./gradlew --no-daemon --stacktrace --info connectedDebugAndroidTest
